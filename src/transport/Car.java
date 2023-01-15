@@ -1,18 +1,18 @@
 package transport;
 
 public class Car {
-    final String brand;            //марка
-    final Integer productionYear;  //год производства
-    final String model;            //модель
-    final Key key;                 //Ключ
+    private final String brand;            //марка
+    private final Integer productionYear;  //год производства
+    private final String model;            //модель
+    private final Key key;                 //Ключ
     public double engineVolume;    //объем двигателя в литрах
     public String color;           //цвет кузова
-    final String productionCountry;//страна сборки
+    private final String productionCountry;//страна сборки
 
     public String kpp;             //коробка передач
-    final String body;             //кузов
+    private final String body;             //кузов
     public String number;          //регистрационный номер
-    final int capasity;            //Количество мест
+    private final int capasity;            //Количество мест
     public boolean rubber;         //«Летняя» или «Зимняя резина»
 
     public void Car(){
