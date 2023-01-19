@@ -16,10 +16,6 @@ public class Main {
         Bus kavz = new Bus("КАвЗ", "4270", 2002, "красный", "Россия",  "bus", 110);
 
 
-        System.out.println(car1);
-        System.out.println(paz);
-
-
         System.out.println("\n" + car1 + "\n" + car2 + "\n" + car3 + "\n" + car4 + "\n" + car5 + "\n");
 
 
