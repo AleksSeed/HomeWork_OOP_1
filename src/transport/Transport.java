@@ -1,5 +1,6 @@
 package transport;
 
+
 public class Transport {
     private String brand;            //марка
     private String model;            //модель

@@ -1,5 +1,6 @@
 package transport;
 
+
 public class Bus extends Transport{
 
     private String brand;            //марка

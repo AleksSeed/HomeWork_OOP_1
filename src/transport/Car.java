@@ -1,5 +1,6 @@
 package transport;
 
+
 public class Car extends Transport{
 
     private final String body;
