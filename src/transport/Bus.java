@@ -26,6 +26,7 @@ public class Bus extends Transport{
         this.conditioner = conditioner;
     }
 
+
     public String getBody() { return body; }
 
     public int getCapacity() { return capacity; }
