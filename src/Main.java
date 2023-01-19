@@ -11,22 +11,14 @@ public class Main {
         Car car4 = new Car("Kia", 2018, "Sportage 4-го поколения", "красный", "Южная Корея", "внедорожник", 180);
         Car car5 = new Car("Hyundai", 2016, "Avante", "оранжевый", "Южная Корея", "седан", 180);
 
-        Bus paz = new Bus("ПАЗ", "4230 «Аврора»", 2007, "белый","Россия" , "bus", 110);
-        Bus liaz = new Bus("ЛИАЗ", "529265", 2015, "синий", "Россия", "bus", 140);
-        Bus kavz = new Bus("КАвЗ", "4270", 2002, "красный", "Россия",  "bus", 110);
+        System.out.println(car1 + "\n" + car2 + "\n" + car3 + "\n" + car4 + "\n" + car5 + "\n");
 
 
-        System.out.println(car1);
-        System.out.println(paz);
+        System.out.println("Задание 2");
+        Bus paz = new Bus("ПАЗ", "4230 «Аврора»", 2007, "белый","Россия" , "bus", 60, false, 110);
+        Bus liaz = new Bus("ЛИАЗ", "529265", 2015, "синий", "Россия", "bus", 80, true, 140);
+        Bus kavz = new Bus("КАвЗ", "4270", 2002, "красный", "Россия",  "bus", 60, false, 90);
 
-
-        System.out.println("\n" + car1 + "\n" + car2 + "\n" + car3 + "\n" + car4 + "\n" + car5 + "\n");
-
-
-        /**====================================================*/
-
-        System.out.println("\n" + paz + "\n" + liaz + "\n" + kavz);
-
-
+        System.out.println(paz + "\n" + liaz + "\n" + kavz);
     }
 }
