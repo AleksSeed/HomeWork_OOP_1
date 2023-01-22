@@ -1,52 +1,115 @@
 package transport;
 
-
-public class Transport {
+public abstract class Transport<T extends Driver> implements Competing {
+    /*
     private String brand;            //марка
     private String model;            //модель
     private Integer productionYear;  //год производства
     private String productionCountry;//страна сборки
-    public String color;            //цвет кузова
-    public int maxSpeed;     //Максимальная скорость передвижения
+    private final String body;
+    private int capacity;
+    private Boolean conditioner;
 
+    public Bus(String brand, String model, Integer productionYear, String color,
+               String productionCountry, String body, int capacity, boolean conditioner,int maxSpeed){
+        super(brand, model, productionYear, productionCountry, color, maxSpeed);
+
+        this.brand = brand;
+        this.model = model;
+        this.productionYear = productionYear;
+        this.productionCountry = productionCountry;
+        this.color = color;
+        this.maxSpeed = maxSpeed;
+
+        this.body = body;
+        this.capacity = capacity;
+        this.conditioner = conditioner;
+    }
+
+
+    public String getBody() { return body; }
+
+    public int getCapacity() { return capacity; }
+
+    public Boolean getConditioner() { return conditioner; }
+
+    @Override
     public String getBrand() { return brand; }
+
+    @Override
     public String getModel() { return model; }
+
+    @Override
     public Integer getProductionYear() { return productionYear; }
-    public String getProductionCountry() { return productionCountry; }
-    public String getColor() { return color; }
-    public void setColor(String color) { this.color = color; }
-    public int getMaxSpeed() { return maxSpeed; }
-    public void setMaxSpeed(int maxSpeed) { this.maxSpeed = maxSpeed; }
 
-
-    public Transport(String brand, String model, int productionYear, String productionCountry, String color, int maxSpeed){
-        if (brand == null || brand == ""){
-            System.out.println("Данные по марке не указаны!");
-        }else{
-            this.brand = brand;
-        }
-        if (model == null || model == ""){
-            System.out.println("Данные по модели не указаны!");
-        }else {
-            this.model = model;
-        }
-        if(productionYear > 0) {
-            this.productionYear = productionYear;
-        } else {
-            System.out.println("Год изготовления для " + brand + " " + model + " указан не верно!");
-        }
-        if (productionCountry == null || productionCountry == ""){
-            System.out.println("Данные по стране изготовителю для " + brand + " " + model + " указаны не верно!");
-        }else {
-            this.productionCountry = productionCountry;
-        }
-        this.setMaxSpeed(maxSpeed);    //косяк тут
-        this.setColor(color);
+    @Override
+    public String getProductionCountry() {
+        return productionCountry;
     }
 
     @Override
     public String toString() {
         return "Автомобиль марки = " + brand + " " + model +  ", " + productionYear + " года выпуска. " + "Cтрана сборки = " + productionCountry +
-                ", цвет = " + color + ", максимальная скорость = " + maxSpeed;
+                ", цвет = " + color + ", максимальная скорость = " + maxSpeed + ", кузов = " + body + ", вместимость салона = " + capacity + ", кондиционер в салоне = " + conditioner;
+    }
+}*/
+
+    private final String brand; // Марка
+    private final String model; // Модель
+    private double engineVolume; //Объем двигателя
+    private T driver;
+    private static final String DEFAULT_VALUE = "default";
+    private static final double DEFAULT_ENGINE_VOLUME = 1.5;
+
+    public Transport(String brand, String model, double engineVolume, T driver) {
+        if(brand == null || brand.isBlank() || brand.isEmpty()) {
+            this.brand = DEFAULT_VALUE;
+        } else {
+            this.brand = brand;
+        }
+        if(model == null || model.isBlank() || model.isEmpty()) {
+            this.model = DEFAULT_VALUE;
+        } else {
+            this.model = model;
+        }
+        setEngineVolume(engineVolume);
+        setDriver(driver);
+    }
+
+    public abstract void startMoving();
+    public abstract void stopMoving();
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getEngineVolume() {
+        return engineVolume;
+    }
+
+    public void setEngineVolume(double engineVolume) {
+        if(engineVolume <= 0) {
+            this.engineVolume = DEFAULT_ENGINE_VOLUME;
+        } else {
+            this.engineVolume = engineVolume;
+        }
+    }
+
+    public T getDriver() {
+        return driver;
+    }
+
+    public void setDriver(T driver) {
+        this.driver = driver;
+    }
+
+    @Override
+    public String toString() {
+        return "Марка: " + brand + ", модель: " + model + ", объем двигателя: " + engineVolume;
     }
 }
+
