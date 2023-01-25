@@ -2,6 +2,7 @@ package transport;
 
 
 public class Car extends Transport<DriverB>{
+    private BodyType bodyType;
 /*
     private final String body;
 
@@ -14,9 +15,45 @@ public class Car extends Transport<DriverB>{
     public String getBody() { return body; }
 */
 
-    public Car(String brand, String model, double engineVolume, DriverB driver) {
+    public Car(String brand, String model, double engineVolume, DriverB driver, BodyType bodyType) {
         super(brand, model, engineVolume, driver);
     }
+
+    public enum BodyType {
+        SEDAN("Седан"),
+        HATCHBACK("Хетчбэк"),
+        COUPE("Купе"),
+        WAGON("Универсал"),
+        OFF_ROAD("Внедорожник"),
+        CROSSOVER("Кроссовер"),
+        PICKUP_TRUCK("Пикап"),
+        VAN("Фургон"),
+        MINIVAN("Минивэн");
+
+        private String BodyType;
+
+        BodyType(String bodyType){
+            setBodyType(bodyType);
+        }
+
+        private String getBodyType(String bodyType) {
+            return this.BodyType;
+        }
+
+        private void setBodyType(String bodyType) {
+            this.BodyType = BodyType;
+        }
+    }
+
+    @Override
+    public void printType() {
+        if (bodyType == null) {
+            System.out.println("Данных по ТС недостаточно");
+        } else {
+            System.out.println("Легковой автомобиль : " + getBrand() + ", марка : " + getModel() + ", " + bodyType);
+        }
+    }
+
 
     @Override
     public void pitStop() {
@@ -51,6 +88,6 @@ public class Car extends Transport<DriverB>{
 
     @Override
     public String toString() {
-        return super.toString() + " - легковой автомобиль";
+        return super.toString() + ", " + bodyType.toString();
     }
 }

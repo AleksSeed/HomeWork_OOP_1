@@ -76,6 +76,7 @@ public abstract class Transport<T extends Driver> implements Competing {
         setDriver(driver);
     }
 
+    public abstract void printType();
     public abstract void startMoving();
     public abstract void stopMoving();
 

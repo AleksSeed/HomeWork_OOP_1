@@ -1,9 +1,65 @@
 package transport;
 
-public class Truck extends Transport<DriverD>{
-    public Truck(String brand, String model, double engineVolume, DriverD driver) {
+public class Truck extends Transport<DriverD> {
+    private WeightTruck weightTruck;
+
+    public Truck(String brand, String model, double engineVolume, DriverD driver, WeightTruck weightTruck) {
         super(brand, model, engineVolume, driver);
+        this.weightTruck = weightTruck;
     }
+
+    @Override
+    public void printType() {
+        if (weightTruck == null) {
+            System.out.println("Данных по ТС недостаточно");
+        } else {
+            System.out.println(weightTruck);
+        }
+    }
+
+    public enum WeightTruck {
+        N1(0d, 3.5d),
+        N2(3.5d, 12d),
+        N3(12d, null);
+
+        private Double weightFrom;
+        private Double weightTo;
+
+        WeightTruck(Double weightFrom, Double weightTo) {
+            setWeightFrom(weightFrom);
+            setWeightTo(weightTo);
+        }
+
+        public Double getWeightFrom() {
+            return weightFrom;
+        }
+
+        public void setWeightFrom(Double weightFrom) {
+            this.weightFrom = weightFrom;
+        }
+
+        public Double getWeightTo() {
+            return weightTo;
+        }
+
+        public void setWeightTo(Double weightTo) {
+            this.weightTo = weightTo;
+        }
+
+
+    @Override
+    public String toString() {
+        String from = (getWeightFrom() == null) ? "" : "от " + getWeightFrom() + " тонн";
+        String to = (getWeightTo() == null) ? "" : " до " + getWeightTo() + " тонн";
+        return "Грузоподъемность : " + from + to;
+    }
+
+}
+
+
+
+
+
 
     @Override
     public void pitStop() {
@@ -37,7 +93,6 @@ public class Truck extends Transport<DriverD>{
     }
 
     @Override
-    public String toString() {
-        return super.toString() + " - грузовой автомобиль";
-    }
+    public String toString() { return super.toString() + " " + weightTruck.toString(); }
+
 }

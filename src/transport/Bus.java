@@ -1,6 +1,7 @@
 package transport;
 
 public class Bus extends Transport<DriverC> {
+    private Capasity capasity;
 /*    private Integer productionYear;  //год производства
     private String productionCountry;//страна сборки
     private final String body;
@@ -49,11 +50,70 @@ public class Bus extends Transport<DriverC> {
                 ", цвет = " + color + ", максимальная скорость = " + maxSpeed + ", кузов = " + body + ", вместимость салона = " + capacity + ", кондиционер в салоне = " + conditioner;
     }*/
 
-        public Bus(String brand, String model, double engineVolume, DriverC driver) {
-            super(brand, model, engineVolume, driver);
+    public Bus(String brand, String model, double engineVolume, DriverC driver, Capasity capasity) {
+        super(brand, model, engineVolume, driver);
+        this.capasity = capasity;
+    }
+
+    public enum Capasity {
+        EXTRA_SMALL(0, 10),
+        SMALL(10, 25),
+        MEDIUM(40, 50),
+        LARGE(60, 80),
+        EXTRA_LARGE(100, 120);
+
+        public int getCapasityFrom() { return capasityFrom; }
+
+        public void setCapasityFrom(int capasityFrom) {
+            this.capasityFrom = capasityFrom;
+        }
+
+        public int getCapasityTo() {
+            return capasityTo;
+        }
+
+        public void setCapasityTo(int capasityTo) {
+            this.capasityTo = capasityTo;
+        }
+
+        private int capasityFrom;
+        private int capasityTo;
+
+        Capasity(int capasityFrom, int capasityTo) {
+            setCapasityFrom(capasityFrom);
+            setCapasity(capasityTo);
+        }
+
+        private void setCapasity(int capasityTo) {
+            this.capasityTo = capasityTo;
         }
 
         @Override
+        public String toString() {
+            String from = (getCapacityFrom() <= 0) ? "" : "от " + getCapacityFrom() + " мест";
+            String to = (getCapacityTo() <= 0) ? "" : (" до " + getCapacityTo() + " мест");
+            return "Вместимость : " + from + to;
+        }
+
+        private int getCapacityFrom() {
+            return capasityFrom;
+        }
+
+        private int getCapacityTo() {
+            return capasityTo;
+        }
+    }
+
+    @Override
+    public void printType() {
+        if (capasity == null) {
+            System.out.println("Данных по ТС недостаточно");
+        } else {
+            System.out.println(capasity);
+        }
+    }
+
+    @Override
         public void pitStop() {
             System.out.println("Автобус " + getBrand() + " остановился");
         }
@@ -86,6 +146,6 @@ public class Bus extends Transport<DriverC> {
 
         @Override
         public String toString() {
-            return super.toString() + " - автобус";
+            return super.toString() + " " + capasity.toString();
         }
 }

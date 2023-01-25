@@ -20,16 +20,16 @@ public class Main {
 
         for (int i = 1; i <= 4; i++) {
             DriverB driverB = new DriverB("Водитель категории B №" + i, false, i);
-            Car car = new Car("Лада_" + i, "Веста Sport ", 1.8, driverB);
+            Car car = new Car("Лада_" + i, "Веста Sport ", 1.8, driverB, Car.BodyType.SEDAN);
 
             DriverC driverC = new DriverC("Водитель категории C №" + i, true, i + 4);
-            Bus bus = new Bus("КАвЗ_" + i, "4235 «Аврора»", 4.43, driverC);
+            Bus bus = new Bus("КАвЗ_" + i, "4235 «Аврора»", 4.43, driverC, Bus.Capasity.LARGE);
 
             DriverD driverD = new DriverD("Водитель категории D №" + i, true, i + 5);
-            Truck truck = new Truck("КАМАЗ_" + i, "4925", 17.241, driverD);
+            Truck truck = new Truck("КАМАЗ_" + i, "4925", 17.241, driverD, Truck.WeightTruck.N2);
 
             System.out.println();
-            System.out.println(car);
+            //System.out.println(car);
             car.pitStop();
             car.bestTimeCircle();
             car.maximumSpeed();
