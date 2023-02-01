@@ -56,11 +56,6 @@ public class Truck extends Transport<DriverD> {
 
 }
 
-
-
-
-
-
     @Override
     public void pitStop() {
         System.out.println("Грузовой автомобиль " + getBrand() + " остановился");
@@ -95,4 +90,6 @@ public class Truck extends Transport<DriverD> {
     @Override
     public String toString() { return super.toString() + " " + weightTruck.toString(); }
 
+    @Override
+    public boolean DiagnosedPass() throws TransportTypeExeption { return false; }
 }

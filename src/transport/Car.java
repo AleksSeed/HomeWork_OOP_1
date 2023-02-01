@@ -3,17 +3,6 @@ package transport;
 
 public class Car extends Transport<DriverB>{
     private BodyType bodyType;
-/*
-    private final String body;
-
-    public Car(String brand, Integer productionYear, String model, String color,
-               String productionCountry, String body, int maxSpeed){
-        super(brand, model, productionYear, productionCountry, color, maxSpeed);
-        this.body = body;
-    }
-
-    public String getBody() { return body; }
-*/
 
     public Car(String brand, String model, double engineVolume, DriverB driver, BodyType bodyType) {
         super(brand, model, engineVolume, driver);
@@ -90,4 +79,7 @@ public class Car extends Transport<DriverB>{
     public String toString() {
         return super.toString() + ", " + bodyType.toString();
     }
+
+    @Override
+    public boolean DiagnosedPass() throws TransportTypeExeption { return false; }
 }
