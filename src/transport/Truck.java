@@ -1,7 +1,11 @@
 package transport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Truck extends Transport<DriverD> {
     private WeightTruck weightTruck;
+    private List<DriverC> driver=new ArrayList<>();
 
     public Truck(String brand, String model, double engineVolume, DriverD driver, WeightTruck weightTruck) {
         super(brand, model, engineVolume, driver);
@@ -46,14 +50,12 @@ public class Truck extends Transport<DriverD> {
             this.weightTo = weightTo;
         }
 
-
     @Override
     public String toString() {
         String from = (getWeightFrom() == null) ? "" : "от " + getWeightFrom() + " тонн";
         String to = (getWeightTo() == null) ? "" : " до " + getWeightTo() + " тонн";
-        return "Грузоподъемность : " + from + to;
+        return "Грузоподъемность " + from + to;
     }
-
 }
 
     @Override
@@ -91,5 +93,23 @@ public class Truck extends Transport<DriverD> {
     public String toString() { return super.toString() + " " + weightTruck.toString(); }
 
     @Override
-    public boolean DiagnosedPass() throws TransportTypeExeption { return false; }
+    public void diagnosedPass() throws TransportTypeExeption {
+        if (getDriver() == null) {
+            throw new TransportTypeExeption("Некорректный тип прав водителя!");
+        } else if (!getDriver().isDriversLicense()) {
+            throw new TransportTypeExeption(getDriver().getFullName() + " не имеет прав, диагностика не пройдена");
+        } else {
+            System.out.println(getDriver().getFullName() +
+                    " имеет соответствующую категорию прав: " + getDriver().getClass() + ", диагностика пройдена");
+        }
+    }
+
+    public String repair(){
+        return "Меняем колесо";
+    }
+
+    @Override
+    public void service() {
+        System.out.println("Грузовик проходит ТО: " + toString());
+    }
 }

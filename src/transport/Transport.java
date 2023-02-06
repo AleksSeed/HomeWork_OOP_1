@@ -1,5 +1,8 @@
 package transport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Transport<T extends Driver> implements Competing {
     private final String brand; // Марка
     private final String model; // Модель
@@ -7,16 +10,15 @@ public abstract class Transport<T extends Driver> implements Competing {
     private T driver;
     private static final String DEFAULT_VALUE = "default";
     private static final double DEFAULT_ENGINE_VOLUME = 1.5;
-
-    private boolean passDiagnosed;
+    private final List<Mechanic> mechanic = new ArrayList<>();
 
     public Transport(String brand, String model, double engineVolume, T driver) {
-        if(brand == null || brand.isBlank() || brand.isEmpty()) {
+        if (brand == null) {
             this.brand = DEFAULT_VALUE;
         } else {
             this.brand = brand;
         }
-        if(model == null || model.isBlank() || model.isEmpty()) {
+        if (model == null) {
             this.model = DEFAULT_VALUE;
         } else {
             this.model = model;
@@ -26,7 +28,9 @@ public abstract class Transport<T extends Driver> implements Competing {
     }
 
     public abstract void printType();
+
     public abstract void startMoving();
+
     public abstract void stopMoving();
 
     public String getBrand() {
@@ -42,7 +46,7 @@ public abstract class Transport<T extends Driver> implements Competing {
     }
 
     public void setEngineVolume(double engineVolume) {
-        if(engineVolume <= 0) {
+        if (engineVolume <= 0) {
             this.engineVolume = DEFAULT_ENGINE_VOLUME;
         } else {
             this.engineVolume = engineVolume;
@@ -62,6 +66,15 @@ public abstract class Transport<T extends Driver> implements Competing {
         return "Марка: " + brand + ", модель: " + model + ", объем двигателя: " + engineVolume;
     }
 
-    public abstract boolean DiagnosedPass() throws TransportTypeExeption;
+    public List<Mechanic> getMechanic () { return mechanic; }
+
+    public void addMechanic (Mechanic mechanic){ mechanic.add(mechanic); }
+
+    public abstract void diagnosedPass() throws TransportTypeExeption;
+
+    public abstract String repair();
+
+    public abstract void service();
+
 }
 

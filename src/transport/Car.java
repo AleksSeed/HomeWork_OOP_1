@@ -1,6 +1,5 @@
 package transport;
 
-
 public class Car extends Transport<DriverB>{
     private BodyType bodyType;
 
@@ -21,13 +20,9 @@ public class Car extends Transport<DriverB>{
 
         private String BodyType;
 
-        BodyType(String bodyType){
-            setBodyType(bodyType);
-        }
+        BodyType(String bodyType){ setBodyType(bodyType); }
 
-        private String getBodyType(String bodyType) {
-            return this.BodyType;
-        }
+        private String getBodyType(String bodyType) { return this.BodyType; }
 
         private void setBodyType(String bodyType) {
             this.BodyType = BodyType;
@@ -42,7 +37,6 @@ public class Car extends Transport<DriverB>{
             System.out.println("Легковой автомобиль : " + getBrand() + ", марка : " + getModel() + ", " + bodyType);
         }
     }
-
 
     @Override
     public void pitStop() {
@@ -76,10 +70,22 @@ public class Car extends Transport<DriverB>{
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ", " + bodyType.toString();
-    }
+    public String toString() { return super.toString() + ", кузов: " + BodyType.SEDAN; }
 
     @Override
-    public boolean DiagnosedPass() throws TransportTypeExeption { return false; }
+    public void diagnosedPass() throws TransportTypeExeption {
+        if (getDriver() == null) {
+            throw new TransportTypeExeption("Некорректный тип прав водителя!");
+        } else if (!getDriver().isDriversLicense()) {
+            throw new TransportTypeExeption(getDriver().getFullName() + " не имеет прав, диагностика не пройдена");
+        } else {
+            System.out.println(getDriver().getFullName() +
+                    " имеет соответствующую категорию прав: " + getDriver().getClass() + ", диагностика пройдена");
+        }
+    }
+
+    public String repair(){ return "Убираем сажу с сиденья"; }
+
+    @Override
+    public void service() { System.out.println("Автомобиль проходит ТО: " + toString()); }
 }

@@ -16,19 +16,15 @@ public class Bus extends Transport<DriverC> {
         EXTRA_LARGE(100, 120);
 
         public int getCapasityFrom() { return capasityFrom; }
-
         public void setCapasityFrom(int capasityFrom) {
             this.capasityFrom = capasityFrom;
         }
-
         public int getCapasityTo() {
             return capasityTo;
         }
-
         public void setCapasityTo(int capasityTo) {
             this.capasityTo = capasityTo;
         }
-
         private int capasityFrom;
         private int capasityTo;
 
@@ -51,7 +47,6 @@ public class Bus extends Transport<DriverC> {
         private int getCapacityFrom() {
             return capasityFrom;
         }
-
         private int getCapacityTo() {
             return capasityTo;
         }
@@ -103,7 +98,13 @@ public class Bus extends Transport<DriverC> {
         }
 
     @Override
-    public boolean DiagnosedPass()  {
-        throw new TransportTypeExeption("Автобусы не проходят TO!");
+    public void diagnosedPass() throws TransportTypeExeption {
+        System.out.println("Автобусы не проходят TO!");
     }
+
+    @Override
+    public String repair() { return null; }
+
+    @Override
+    public void service() {}
 }

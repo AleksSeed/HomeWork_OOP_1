@@ -1,13 +1,15 @@
 import transport.*;
 
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
 
-        for (int i = 1; i <= 4; i++) {
-            DriverB driverB = new DriverB("Водитель категории B №" + i, false, i);
-            Car car = new Car("Лада_" + i, "Веста Sport ", 1.8, driverB, Car.BodyType.SEDAN);
+        Mechanic mechanic1 = new Mechanic("Вася Пупкин", "Fix Service");
+        Mechanic mechanic2 = new Mechanic("Пертушка Шлангов", "Ремонт и покраска");
+        Mechanic mechanic3 = new Mechanic("Мишаня Шуруповерт", "Шурик и ко");
+
+         for (int i = 1; i <= 3; i++) {
+            DriverB driverB = new DriverB("Водитель категории B №" + i, true, i);
+            Car car = new Car("Лада_" + i, "Веста Sport", 1.8, driverB, Car.BodyType.SEDAN);
 
             DriverD driverD = new DriverD("Водитель категории D №" + i, true, i + 5);
             Truck truck = new Truck("КАМАЗ_" + i, "4925", 17.241, driverD, Truck.WeightTruck.N2);
@@ -16,43 +18,54 @@ public class Main {
             Bus bus = new Bus("КАвЗ_" + i, "4235 «Аврора»", 4.43, driverC, Bus.Capasity.LARGE);
 
             System.out.println();
-            //System.out.println(car);
+           // System.out.println(car);
             car.pitStop();
             car.bestTimeCircle();
             car.maximumSpeed();
+            car.repair();
+            car.service();
+            car.addMechanic(mechanic1);
+             try {
+                 car.diagnosedPass();
+             } catch (TransportTypeExeption e) {
+                 System.out.println(e.getMessage());
+             }
 
             System.out.println();
             System.out.println(bus);
             bus.pitStop();
             bus.bestTimeCircle();
             bus.maximumSpeed();
+            bus.addMechanic(mechanic2);
+             try {
+                 bus.diagnosedPass();
+             } catch (TransportTypeExeption e) {
+                 System.out.println(e.getMessage());
+             }
 
             System.out.println();
             System.out.println(truck);
             truck.pitStop();
             truck.bestTimeCircle();
             truck.maximumSpeed();
+            truck.repair();
+            truck.service();
+            truck.addMechanic(mechanic3);
+             try {
+                 truck.diagnosedPass();
+             } catch (TransportTypeExeption e) {
+                 System.out.println(e.getMessage());
+             }
 
             System.out.println("\n*** Заезды ***");
             printInfoCompeting(car);
             printInfoCompeting(bus);
             printInfoCompeting(truck);
 
-
-            System.out.println("\n====== Данные по ТО ======");
-            checkTransport(car, truck, bus);
-
-            Arrays.stream(new Transport[]{car, bus, truck}).forEach(t -> {
-                System.out.println(t.getDriver());
-                t.printType();
-                System.out.println(t);
-                try {
-                    t.DiagnosedPass();
-                } catch (UnsupportedOperationException e) {
-                    System.out.println("Операция не поддерживается - " + e.getMessage());
-                }
-                System.out.println();
-            });
+            ServiceStation serviceStation = new ServiceStation();
+            serviceStation.addCar(car);
+            serviceStation.addTruck(truck);
+           // serviceStation.maintenance();    //удаление транспорта из очереди
         }
     }
 
@@ -65,28 +78,4 @@ public class Main {
                     " не может управлять автомобилем " + transport.getBrand() + " и не будет участвовать в заезде");
         }
     }
-
-  /**Добавьте в класс Transport метод «Пройти диагностику».
-
-     Переопределите данный метод для классов «Легковые автомобили» и «Грузовые автомобили» — объекты данных типов могут проходить диагностику.
-     Объекты класса «Автобусы» диагностику проходить не должны. При выполнении этого метода у автобуса должно выводиться сообщение о том, что автобусам проходить
-     диагностику не нужно. Для  этого создайте собственное проверяемое исключение TransportTypeException. Конкретную информацию о причине возникновения исключения
-     следует передать в объекте исключения в виде строки.
-
-     В методе main вызовите метод «Пройти диагностику» для объектов каждого типа транспорта.*/
-
-
-  public static void checkTransport(Transport... transports) throws TransportTypeExeption {
-      int count = 0;
-      for (Transport transport : transports) {
-          if (!transport.DiagnosedPass()) {
-              try {
-                  throw new RuntimeException(transport.getBrand() + " " + transport.getModel() + " не прошел ТО!");
-              } catch (RuntimeException e) {
-                  System.out.println(e.getMessage());
-              }
-          }
-      }
-  }
-
 }
