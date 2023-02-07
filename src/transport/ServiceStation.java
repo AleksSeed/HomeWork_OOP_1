@@ -18,11 +18,11 @@ public class ServiceStation {
         add(truck);
     }
 
-   /* public void maintenance() {
+    public void maintenance() {
         if (!transportQueue.isEmpty()) {
             Transport transport = transportQueue.poll(); // удаление транспорта из очереди
             // обслуживание транспорта
             transport.service();
         }
-    }*/
+    }
 }

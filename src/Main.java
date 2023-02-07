@@ -1,11 +1,16 @@
 import transport.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
 
         Mechanic mechanic1 = new Mechanic("Вася Пупкин", "Fix Service");
         Mechanic mechanic2 = new Mechanic("Пертушка Шлангов", "Ремонт и покраска");
         Mechanic mechanic3 = new Mechanic("Мишаня Шуруповерт", "Шурик и ко");
+
+        Map<String, String> mechanicMap = new HashMap<String, String>();
 
          for (int i = 1; i <= 3; i++) {
             DriverB driverB = new DriverB("Водитель категории B №" + i, true, i);
@@ -66,8 +71,18 @@ public class Main {
             serviceStation.addCar(car);
             serviceStation.addTruck(truck);
            // serviceStation.maintenance();    //удаление транспорта из очереди
-        }
+
+             mechanicMap.put(car.getBrand(), mechanic1.getFio());
+             mechanicMap.put(bus.getBrand(), mechanic2.getFio());
+             mechanicMap.put(truck.getBrand(), mechanic3.getFio());
+
+             };
+        System.out.println("\nСписок механиков: ");
+        mechanicMap.forEach((t, m) -> {
+            System.out.println(t + ";  " + m);
+         });
     }
+
 
     private static void printInfoCompeting(Transport<?> transport){
         if (transport.getDriver().isDriversLicense()) {
