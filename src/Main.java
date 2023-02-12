@@ -1,7 +1,6 @@
 import transport.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +10,8 @@ public class Main {
         Mechanic mechanic3 = new Mechanic("Мишаня Шуруповерт", "Шурик и ко");
 
         Map<String, String> mechanicMap = new HashMap<String, String>();
+
+        Set<String> drivers = new HashSet<>();
 
          for (int i = 1; i <= 3; i++) {
             DriverB driverB = new DriverB("Водитель категории B №" + i, true, i);
@@ -30,6 +31,7 @@ public class Main {
             car.repair();
             car.service();
             car.addMechanic(mechanic1);
+            drivers.add(driverB.getFullName());
              try {
                  car.diagnosedPass();
              } catch (TransportTypeExeption e) {
@@ -42,6 +44,7 @@ public class Main {
             bus.bestTimeCircle();
             bus.maximumSpeed();
             bus.addMechanic(mechanic2);
+            drivers.add(driverC.getFullName());
              try {
                  bus.diagnosedPass();
              } catch (TransportTypeExeption e) {
@@ -56,6 +59,7 @@ public class Main {
             truck.repair();
             truck.service();
             truck.addMechanic(mechanic3);
+            drivers.add(driverD.getFullName());
              try {
                  truck.diagnosedPass();
              } catch (TransportTypeExeption e) {
@@ -77,10 +81,18 @@ public class Main {
              mechanicMap.put(truck.getBrand(), mechanic3.getFio());
 
              };
+
         System.out.println("\nСписок механиков: ");
         mechanicMap.forEach((t, m) -> {
             System.out.println(t + ";  " + m);
          });
+
+        System.out.println("\nСписок водителей: ");
+
+        Iterator<String> driver = drivers.iterator();
+        while (driver.hasNext()){
+            System.out.println(driver.next());
+        }
     }
 
 
@@ -94,3 +106,14 @@ public class Main {
         }
     }
 }
+/**Создайте множество (в реализации HashSet ), состоящее из водителей, таким образом, чтобы, в случае добавления одного и того же водителя в базу данных два раза,
+ * в консоль информация выводилась без повторов.
+ *
+ Затем выведите всех водителей в консоль с помощью итератора.
+
+ Критерии оценки
+ Использована реализация HashSet для создания множества.
+ В консоль выводится информация о водителях без повтора.
+ Создан итератор.
+ Все водители выведены в консоль с помощью итератора.
+ */
