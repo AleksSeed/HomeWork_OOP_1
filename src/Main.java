@@ -5,8 +5,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Set<Mechanic> mechanic = new HashSet<>();
-        Set<String> drivers = new HashSet<>();
-
+        Set<Driver> drivers = new HashSet<>();
 
         Mechanic mechanic1 = new Mechanic("Вася Пупкин", "Fix Service");
         mechanic.add(mechanic1);
@@ -17,41 +16,42 @@ public class Main {
 
         Map<String, String> mechanicMap = new HashMap<String, String>();
 
-         for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             Driver driverB = new DriverB("Водитель категории B №" + i, true, i);
+            drivers.add(driverB);
             Car car = new Car("Лада_" + i, "Веста Sport", 1.8, (DriverB) driverB, Car.BodyType.SEDAN);
 
             Driver driverD = new DriverD("Водитель категории D №" + i, true, i + 5);
+            drivers.add(driverD);
             Truck truck = new Truck("КАМАЗ_" + i, "4925", 17.241, (DriverD) driverD, Truck.WeightTruck.N2);
 
             Driver driverC = new DriverC("Водитель категории C №" + i, true, i + 4);
+            drivers.add(driverC);
             Bus bus = new Bus("КАвЗ_" + i, "4235 «Аврора»", 4.43, (DriverC) driverC, Bus.Capasity.LARGE);
 
             System.out.println();
-           // System.out.println(car);
+            // System.out.println(car);
             car.pitStop();
             car.bestTimeCircle();
             car.maximumSpeed();
             car.repair();
             car.service();
-            drivers.add(driverB.getFullName());
-             try {
-                 car.diagnosedPass();
-             } catch (TransportTypeExeption e) {
-                 System.out.println(e.getMessage());
-             }
+            try {
+                car.diagnosedPass();
+            } catch (TransportTypeExeption e) {
+                System.out.println(e.getMessage());
+            }
 
             System.out.println();
             System.out.println(bus);
             bus.pitStop();
             bus.bestTimeCircle();
             bus.maximumSpeed();
-            drivers.add(driverC.getFullName());
-             try {
-                 bus.diagnosedPass();
-             } catch (TransportTypeExeption e) {
-                 System.out.println(e.getMessage());
-             }
+            try {
+                bus.diagnosedPass();
+            } catch (TransportTypeExeption e) {
+                System.out.println(e.getMessage());
+            }
 
             System.out.println();
             System.out.println(truck);
@@ -60,12 +60,12 @@ public class Main {
             truck.maximumSpeed();
             truck.repair();
             truck.service();
-            drivers.add(driverD.getFullName());
-             try {
-                 truck.diagnosedPass();
-             } catch (TransportTypeExeption e) {
-                 System.out.println(e.getMessage());
-             }
+
+            try {
+                truck.diagnosedPass();
+            } catch (TransportTypeExeption e) {
+                System.out.println(e.getMessage());
+            }
 
             System.out.println("\n*** Заезды ***");
             printInfoCompeting(car);
@@ -75,25 +75,27 @@ public class Main {
             ServiceStation serviceStation = new ServiceStation();
             serviceStation.addCar(car);
             serviceStation.addTruck(truck);
-           // serviceStation.maintenance();    //удаление транспорта из очереди
+            // serviceStation.maintenance();    //удаление транспорта из очереди
 
-             mechanicMap.put(car.getBrand(), mechanic1.toString());
-             mechanicMap.put(bus.getBrand(), mechanic2.toString());
-             mechanicMap.put(truck.getBrand(), mechanic3.toString());
-             };
+            mechanicMap.put(car.getBrand(), mechanic1.toString());
+            mechanicMap.put(bus.getBrand(), mechanic2.toString());
+            mechanicMap.put(truck.getBrand(), mechanic3.toString());
+
+        }
+        ;
 
         System.out.println("\nСписок механиков: ");
         mechanicMap.forEach((t, m) -> {
             System.out.println(t + ";  " + m);
-         });
+        });
 
         System.out.println("\nСписок водителей: ");
-        Iterator<String> driver = drivers.iterator();
-        while (driver.hasNext()){
-            System.out.println(driver.next());
+        Iterator<Driver> driver = drivers.iterator();
+        while (driver.hasNext()) {
+            System.out.println(drivers.toString());
+            break;
         }
     }
-
 
     private static void printInfoCompeting(Transport<?> transport){
         if (transport.getDriver().isDriversLicense()) {
@@ -105,6 +107,7 @@ public class Main {
         }
     }
 }
+
 /**Создайте множество (в реализации HashSet ), состоящее из водителей, таким образом, чтобы, в случае добавления одного и того же водителя в базу данных два раза,
  * в консоль информация выводилась без повторов.
  *

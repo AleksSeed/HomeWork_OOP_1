@@ -1,5 +1,7 @@
 package transport;
 
+import org.w3c.dom.ls.LSOutput;
+
 public abstract class Driver {
     private String fullName;
     private boolean driversLicense;
@@ -12,27 +14,34 @@ public abstract class Driver {
         this.drivingExperience = drivingExperience;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
     public abstract void startMoving();
 
     public abstract void stopMoving();
 
     public abstract void refuelAuto();
 
-    public String getFullName() {
-        return fullName;
-    }
 
     public void setFullName(String fullName) {
         if(fullName == null || fullName.isBlank() || fullName.isEmpty()) {
-            this.fullName = DEFAULT_VALUE;
+            fullName = DEFAULT_VALUE;
         } else {
-            this.fullName = fullName;
+            fullName = fullName;
         }
+    }
+
+    @Override
+    public String toString() {
+        return fullName + ", наличие лицензии = " + driversLicense + ", водительский стаж = " + drivingExperience + "\n";
     }
 
     public boolean isDriversLicense() {
         return driversLicense;
     }
+
 
     public void setDriversLicense(boolean driversLicense) {
         this.driversLicense = driversLicense;
