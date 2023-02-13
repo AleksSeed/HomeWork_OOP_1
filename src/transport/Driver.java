@@ -55,3 +55,26 @@ public abstract class Driver {
         this.drivingExperience = drivingExperience;
     }
 }
+
+    @Override
+    public String toString() {
+        return fullName + ", наличие лицензии = " + driversLicense + ", водительский стаж = " + drivingExperience + "\n";
+    }
+
+    public boolean isDriversLicense() {
+        return driversLicense;
+    }
+
+
+    public void setDriversLicense(boolean driversLicense) {
+        this.driversLicense = driversLicense;
+    }
+
+    public int getDrivingExperience() {
+        return drivingExperience;
+    }
+
+    public void setDrivingExperience(int drivingExperience) {
+        this.drivingExperience = drivingExperience;
+    }
+}
