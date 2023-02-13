@@ -103,7 +103,7 @@ public class Bus extends Transport<DriverC> {
     }
 
     @Override
-    public String repair() { return null; }
+    public String repair() { return "Автобус на ремонте"; }
 
     @Override
     public void service() {}
